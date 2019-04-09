@@ -19,5 +19,5 @@ if __name__ == "__main__":
     import datetime
     sc = SparkContext()
     rdd = sc.textFile('dc_ride_aggv31.csv')
-    counts = rdd.mapPartitionsWithIndex(processTrips).reduceByKey(lambda x,y:x+y).take(10)
+    counts = rdd.mapPartitionsWithIndex(processTrips).reduceByKey(lambda x,y:x+y).collect()
     print(counts)
