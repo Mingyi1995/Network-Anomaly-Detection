@@ -20,4 +20,4 @@ if __name__ == "__main__":
     sc = SparkContext()
     rdd = sc.textFile('NewYork_Taxi.csv')
     counts = rdd.mapPartitionsWithIndex(processTrips).reduceByKey(lambda x,y:x+y).saveAsTextFile('DailyAggregatedNewYork')
-    print(done)
+    print('done')
