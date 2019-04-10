@@ -7,8 +7,8 @@ def processTrips(pid, records):
     counts = {}
     for row in reader:
         try:
-            DOY = str(row[3])+' '+str(row[4])
-            date = datetime.datetime.strptime(DOY, '%Y %j').strftime('%d/%m/%Y')
+            DOY = str(row[1])
+            date = datetime.datetime.strptime('2018-01-01 00:24:39', '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y')
             amount = int(row[6])
             yield((date),amount)
         except ValueError:
@@ -19,5 +19,5 @@ if __name__ == "__main__":
     import datetime
     sc = SparkContext()
     rdd = sc.textFile('dc_ride_aggv31.csv')
-    counts = rdd.mapPartitionsWithIndex(processTrips).reduceByKey(lambda x,y:x+y).collect()
-    print(counts)
+    counts = rdd.mapPartitionsWithIndex(processTrips).reduceByKey(lambda x,y:x+y).saveAsTextFile('DailyAggregatedNewYork')
+    print(done)
