@@ -18,6 +18,6 @@ from pyspark import SparkContext
 if __name__ == "__main__":
     import datetime
     sc = SparkContext()
-    rdd = sc.textFile('dc_ride_aggv31.csv')
+    rdd = sc.textFile('NewYork_Taxi.csv')
     counts = rdd.mapPartitionsWithIndex(processTrips).reduceByKey(lambda x,y:x+y).saveAsTextFile('DailyAggregatedNewYork')
     print(done)
